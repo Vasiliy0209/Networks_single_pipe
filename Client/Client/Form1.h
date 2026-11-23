@@ -262,27 +262,19 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	}
 private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 		//Проверка состояния pipe
-		GetOverlappedResult(hPipe, &Over, &cbRead, FALSE);
-		if (cbRead > 0) {
-			
-			/*String^ s = gcnew String(Buf3);
-			listBox1->Items->Add(s);*/
+		for(;;) {
+			//if (!GetOverlappedResult(hPipe, &Over, &cbRead, FALSE) || cbRead == 0) break;
+			GetOverlappedResult(hPipe, &Over, &cbRead, FALSE);
+
+			if (cbRead == 0) break;
+
 			ReadFile(hPipe, Buf3, 512, &cbRead, &Over);
 
 			String^ s = gcnew String(Buf3);
 			listBox1->Items->Add(s);
 
-			/*wchar_t* ctx = nullptr;
-
-			if (wcsncmp(Buf3, L"LIST", 4) == 0) {
-				for (wchar_t* tok = wcstok(Buf3 + 4, L"|", &ctx); tok; tok = wcstok(nullptr, L"|", &ctx)) {
-					listBox1->Items->Add(gcnew String(tok));
-				}
-			}
-			else {
-				String^ s = gcnew String(Buf3);
-				listBox1->Items->Add(L"Получено: " + s);
-			}*/
+			//ZeroMemory(&Over, sizeof(Over));
+			
 		} // if
 	}
 private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
