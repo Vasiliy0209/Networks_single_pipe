@@ -55,7 +55,10 @@ void SendMessageHistory(int client_id) {
 			message_history[i].message_text
 		);
 
-		WriteFile(hPipe[client_id], formatted_message, 2000, NULL, NULL);
+		unsigned long cbWritten;
+		WriteFile(hPipe[client_id], formatted_message, (wcslen(formatted_message) + 1) * 2, &cbWritten, NULL);
+
+		//WriteFile(hPipe[client_id], formatted_message, 2000, NULL, NULL);
 	}
 
 	//Отправка данных в Pipe
@@ -329,7 +332,7 @@ private: System::Void HandleClient() {
 
 	//Создание Pipe для данного клиента
 	hPipe[client_count] = CreateNamedPipe(pipe_name, PIPE_ACCESS_DUPLEX,
-		PIPE_TYPE_BYTE | PIPE_NOWAIT, PIPE_UNLIMITED_INSTANCES, 1000, 1000, 5000,
+		PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_NOWAIT, PIPE_UNLIMITED_INSTANCES, 65536, 4096, 5000,
 		NULL);
 	if (hPipe[client_count] != INVALID_HANDLE_VALUE) {
 		listBox1->Items->Add("Pipe создан");
