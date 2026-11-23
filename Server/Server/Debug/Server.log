@@ -6,7 +6,7 @@ D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\AssemblyI
       Сообщение: "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
   
   Server.cpp
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "1" имеет тип "wchar_t *"
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "7" имеет тип "wchar_t *"
   (компиляция исходного файла "/Server.cpp")
       D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
       рекомендуется использовать "%lS" в строке форматирования
@@ -17,29 +17,7 @@ D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(5
       D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
       рекомендуется использовать "%wS" в строке форматирования
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "2" имеет тип "wchar_t *"
-  (компиляция исходного файла "/Server.cpp")
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
-      рекомендуется использовать "%lS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
-      рекомендуется использовать "%llS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
-      рекомендуется использовать "%LS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
-      рекомендуется использовать "%wS" в строке форматирования
-  
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "9" имеет тип "wchar_t *"
-  (компиляция исходного файла "/Server.cpp")
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
-      рекомендуется использовать "%lS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
-      рекомендуется использовать "%llS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
-      рекомендуется использовать "%LS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
-      рекомендуется использовать "%wS" в строке форматирования
-  
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "10" имеет тип "wchar_t *"
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "8" имеет тип "wchar_t *"
   (компиляция исходного файла "/Server.cpp")
       D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(52,4):
       рекомендуется использовать "%lS" в строке форматирования
@@ -53,70 +31,67 @@ D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(5
 D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(50,3): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(60,3): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(281,28): warning C4477: "swprintf_s": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "1" имеет тип "wchar_t *"
   (компиляция исходного файла "/Server.cpp")
-  
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(283,28): warning C4477: "swprintf_s": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "1" имеет тип "wchar_t *"
-  (компиляция исходного файла "/Server.cpp")
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(283,28):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(281,28):
       рекомендуется использовать "%lS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(283,28):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(281,28):
       рекомендуется использовать "%llS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(283,28):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(281,28):
       рекомендуется использовать "%LS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(283,28):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(281,28):
       рекомендуется использовать "%wS" в строке форматирования
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "7" имеет тип "wchar_t *"
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "7" имеет тип "wchar_t *"
   (компиляция исходного файла "/Server.cpp")
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7):
       рекомендуется использовать "%lS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7):
       рекомендуется использовать "%llS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7):
       рекомендуется использовать "%LS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7):
       рекомендуется использовать "%wS" в строке форматирования
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "8" имеет тип "wchar_t *"
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7): warning C4477: "swprintf": в строке форматирования "%S" требуется аргумент типа "char *", но вариативный аргумент "8" имеет тип "wchar_t *"
   (компиляция исходного файла "/Server.cpp")
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7):
       рекомендуется использовать "%lS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7):
       рекомендуется использовать "%llS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7):
       рекомендуется использовать "%LS" в строке форматирования
-      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(294,7):
+      D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,7):
       рекомендуется использовать "%wS" в строке форматирования
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(285,6): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(283,6): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(292,6): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(290,6): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(243,14): warning C4101: l: неиспользованная локальная переменная
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(241,14): warning C4101: l: неиспользованная локальная переменная
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(243,11): warning C4101: i: неиспользованная локальная переменная
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(241,11): warning C4101: i: неиспользованная локальная переменная
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(419,21): warning C4018: '<': несоответствие знака и беззнака
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(417,21): warning C4018: '<': несоответствие знака и беззнака
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(423,4): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(421,4): warning C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(424,4): warning C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(422,4): warning C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(425,4): warning C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(423,4): warning C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(439,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(437,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (компиляция исходного файла "/Server.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(378,16): warning C4101: Buf: неиспользованная локальная переменная
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Server\Server\Form1.h(376,16): warning C4101: Buf: неиспользованная локальная переменная
   (компиляция исходного файла "/Server.cpp")
   
   Создание кода...

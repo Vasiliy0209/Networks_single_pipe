@@ -269,7 +269,10 @@ private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e
 			listBox1->Items->Add(s);*/
 			ReadFile(hPipe, Buf3, 512, &cbRead, &Over);
 
-			wchar_t* ctx = nullptr;
+			String^ s = gcnew String(Buf3);
+			listBox1->Items->Add(s);
+
+			/*wchar_t* ctx = nullptr;
 
 			if (wcsncmp(Buf3, L"LIST", 4) == 0) {
 				for (wchar_t* tok = wcstok(Buf3 + 4, L"|", &ctx); tok; tok = wcstok(nullptr, L"|", &ctx)) {
@@ -279,7 +282,7 @@ private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e
 			else {
 				String^ s = gcnew String(Buf3);
 				listBox1->Items->Add(L"Получено: " + s);
-			}
+			}*/
 		} // if
 	}
 private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
@@ -340,7 +343,7 @@ private: System::Void timerMailslot_Tick(System::Object^ sender, System::EventAr
 			wcscat(Buf2, server_hostname_w); //конкатенация C-строк
 			wcscat(Buf2, L"\\pipe\\server"); //конкатенация C-строк*/
 
-			System::Threading::Thread::Sleep(2000);
+			//System::Threading::Thread::Sleep(2000);
 
 			//Собственно подключение к pipe сервера
 			hPipe = CreateFile(pipe_name, GENERIC_READ | GENERIC_WRITE,

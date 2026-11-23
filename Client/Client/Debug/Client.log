@@ -18,22 +18,19 @@ D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(1
 D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(199,11): warning C4101: i: неиспользованная локальная переменная
   (компиляция исходного файла "/Client.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(275,25): warning C4996: 'wcstok': This function or variable may be unsafe. Consider using wcstok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(335,21): warning C4018: '<': несоответствие знака и беззнака
   (компиляция исходного файла "/Client.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(332,21): warning C4018: '<': несоответствие знака и беззнака
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(325,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (компиляция исходного файла "/Client.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(322,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(326,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   (компиляция исходного файла "/Client.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(323,4): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(304,16): warning C4101: Buf: неиспользованная локальная переменная
   (компиляция исходного файла "/Client.cpp")
   
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(301,16): warning C4101: Buf: неиспользованная локальная переменная
-  (компиляция исходного файла "/Client.cpp")
-  
-D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(301,27): warning C4101: Buf2: неиспользованная локальная переменная
+D:\BOX\Trainer\2026_2027\Term1\Networks\20261124\PIPE_36\Client\Client\Form1.h(304,27): warning C4101: Buf2: неиспользованная локальная переменная
   (компиляция исходного файла "/Client.cpp")
   
   Создание кода...

@@ -38,7 +38,7 @@ void AddMessageToHistory(ClientMessage message) {
 
 //Отправка истории сообщений вновь подключившемуся клиенту
 void SendMessageHistory(int client_id) {
-	wchar_t formatted_message[20000] = L"LIST";
+	wchar_t formatted_message[2000];
 	wchar_t delimiter[5] = L"";
 
 	tm tm;
@@ -49,20 +49,18 @@ void SendMessageHistory(int client_id) {
 		//Формирование ответа клиенту
 		swprintf(
 			formatted_message,
-			L"%S%S%02d.%02d.%04d %02d:%02d:%02d [%S] %S",
-			formatted_message,
-			delimiter,
+			L"%02d.%02d.%04d %02d:%02d:%02d [%S] %S",					
 			tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec,
 			message_history[i].from,
 			message_history[i].message_text
 		);
 
-		wcscpy(delimiter,L"|");
+		WriteFile(hPipe[client_id], formatted_message, 2000, NULL, NULL);
 	}
 
 	//Отправка данных в Pipe
-	if(message_count>0)
-		WriteFile(hPipe[client_id], formatted_message, 2000, NULL, NULL);		
+	//if(message_count>0)
+	//	WriteFile(hPipe[client_id], formatted_message, 2000, NULL, NULL);		
 }
 
 
