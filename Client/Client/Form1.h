@@ -1,14 +1,12 @@
 #include <windows.h>
 #include <winsock.h>
+#include <stdio.h>
+
 #pragma once
 
-HANDLE hPipe;
-HANDLE ReceiveMailslotHandle, SendMailslotHandle;
-
-DWORD      cbRead, LastError;
-OVERLAPPED Over = {0, 0, 0, 0, NULL};
-wchar_t       Buf3[256];
-
+HANDLE hPipe = INVALID_HANDLE_VALUE;
+HANDLE ReceiveMailslotHandle = INVALID_HANDLE_VALUE;
+wchar_t Buf3[1024];
 
 namespace Client {
 
@@ -19,31 +17,28 @@ namespace Client {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Сводка для Form1
-	///
-	/// Внимание! При изменении имени этого класса необходимо также изменить
-	///          свойство имени файла ресурсов ("Resource File Name") для средства компиляции управляемого ресурса,
-	///          связанного со всеми файлами с расширением .resx, от которых зависит данный класс. В противном случае,
-	///          конструкторы не смогут правильно работать с локализованными
-	///          ресурсами, сопоставленными данной форме.
-	/// </summary>
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
-		int first=1;
+	private:
+		System::Windows::Forms::ListBox^ listBox1;
+		System::Windows::Forms::Button^ button1;
+		System::Windows::Forms::Button^ button2;
+		System::Windows::Forms::Label^ label2;
+		System::Windows::Forms::TextBox^ textBox2;
+		System::Windows::Forms::Button^ button3;
+		System::Windows::Forms::Timer^ timerPipe;
+		System::Windows::Forms::Timer^ timerMailslot;
+		System::Windows::Forms::TextBox^ tb_clientuid;
+		System::Windows::Forms::Label^ label1;
+		System::ComponentModel::IContainer^ components;
+
 	public:
 		Form1(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: добавьте код конструктора
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Освободить все используемые ресурсы.
-		/// </summary>
 		~Form1()
 		{
 			if (components)
@@ -51,33 +46,8 @@ namespace Client {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::ListBox^  listBox1;
-	protected: 
-
-
-	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::Button^  button2;
-	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::TextBox^  textBox2;
-	private: System::Windows::Forms::Button^  button3;
-	private: System::Windows::Forms::Timer^ timerPipe;
-
-	private: System::Windows::Forms::Timer^ timerMailslot;
-	private: System::Windows::Forms::TextBox^ tb_clientuid;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::ComponentModel::IContainer^ components;
-
-	private:
-		/// <summary>
-		/// Требуется переменная конструктора.
-		/// </summary>
-
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Обязательный метод для поддержки конструктора - не изменяйте
-		/// содержимое данного метода при помощи редактора кода.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
@@ -108,7 +78,7 @@ namespace Client {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(116, 28);
 			this->button1->TabIndex = 3;
-			this->button1->Text = L"Подключться";
+			this->button1->Text = L"Подключиться";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
 			// 
@@ -150,27 +120,29 @@ namespace Client {
 			// 
 			// timerPipe
 			// 
+			this->timerPipe->Interval = 50;
 			this->timerPipe->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
 			// 
 			// timerMailslot
 			// 
+			this->timerMailslot->Interval = 100;
 			this->timerMailslot->Tick += gcnew System::EventHandler(this, &Form1::timerMailslot_Tick);
 			// 
 			// tb_clientuid
 			// 
 			this->tb_clientuid->Location = System::Drawing::Point(149, 329);
 			this->tb_clientuid->Name = L"tb_clientuid";
-			this->tb_clientuid->Size = System::Drawing::Size(100, 22);
+			this->tb_clientuid->Size = System::Drawing::Size(150, 22);
 			this->tb_clientuid->TabIndex = 8;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(12, 338);
+			this->label1->Location = System::Drawing::Point(12, 335);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(61, 16);
+			this->label1->Size = System::Drawing::Size(86, 16);
 			this->label1->TabIndex = 9;
-			this->label1->Text = L"Client uid";
+			this->label1->Text = L"Имя клиента";
 			// 
 			// Form1
 			// 
@@ -186,182 +158,185 @@ namespace Client {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->listBox1);
 			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->Text = L"Клиент (Единый Pipe)";
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Form1::Form1_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-		wchar_t       Buf[1001], Buf2[1001];
-		unsigned long cbWritten;
-		int			  i, l;
-        
-		//Создание мэйлслота клиента
+
+	private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
+		WSADATA WSAData;
+		if (WSAStartup(MAKEWORD(2, 0), &WSAData) != 0) {
+			listBox1->Items->Add("Ошибка инициализации WSAStartup");
+			return;
+		}
+
+		// Подставляем имя ПК как ник по умолчанию (можно изменить в поле)
+		char host[255] = { 0 };
+		if (gethostname(host, 255) == 0) {
+			tb_clientuid->Text = gcnew String(host);
+		}
+	}
+
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (hPipe != INVALID_HANDLE_VALUE) {
+			listBox1->Items->Add("Уже подключено к серверу");
+			return;
+		}
+
+		if (ReceiveMailslotHandle != INVALID_HANDLE_VALUE) {
+			CloseHandle(ReceiveMailslotHandle);
+		}
+
+		// 1. Создаём Mailslot клиента для приёма ответа от сервера
 		ReceiveMailslotHandle = CreateMailslot(L"\\\\.\\mailslot\\client", 0, MAILSLOT_WAIT_FOREVER, NULL);
 		if (ReceiveMailslotHandle == INVALID_HANDLE_VALUE) {
-			listBox1->Items->Add("Ошибка при создании mailslot");
-			timerMailslot->Enabled = false;
+			listBox1->Items->Add("Ошибка при создании mailslot клиента");
+			return;
 		}
-		else {
-			listBox1->Items->Add("Mailslot создан");
-			timerMailslot->Enabled = true;
-		} // else
+		timerMailslot->Enabled = true;
 
-		//Подключение к мэйлслоту сервера		
-		char client_hostname[255];
-
-		//Формирование широковещательного адреса
-		wcscpy(Buf2, L"\\\\*\\mailslot\\server");
-		
-		//Собственно подключение к мэйлслоту сервера
-		SendMailslotHandle = CreateFile(Buf2, GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+		// 2. Отправляем широковещательный запрос на поиск сервера
+		HANDLE SendMailslotHandle = CreateFile(L"\\\\*\\mailslot\\server", GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 		if (SendMailslotHandle == INVALID_HANDLE_VALUE) {
-			listBox1->Items->Add("Ошибка при создании mailslot");
-		} // if
+			listBox1->Items->Add("Ошибка открытия широковещательного mailslot");
+			return;
+		}
 
-		//Определение имени компьютера клиента
+		char client_hostname[255] = { 0 };
+		unsigned long cbWritten;
 		gethostname(client_hostname, 255);
 
-		if (WriteFile(SendMailslotHandle, client_hostname, 255, &cbWritten, NULL)) {
-			listBox1->Items->Add(L"Отправлен широковещательный запрос на поиск сервера");
+		if (WriteFile(SendMailslotHandle, client_hostname, (DWORD)(strlen(client_hostname) + 1), &cbWritten, NULL)) {
+			listBox1->Items->Add(L"Отправлен широковещательный запрос на поиск сервера...");
 		}
 		else {
-			listBox1->Items->Add("Ошибка WriteFile");
-		} // else
+			listBox1->Items->Add("Ошибка отправки запроса поиска");
+		}
 		CloseHandle(SendMailslotHandle);
-		//---[/]---
+	}
+
+	private: System::Void timerMailslot_Tick(System::Object^ sender, System::EventArgs^ e) {
 
 		
-    }
-private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-		CloseHandle(hPipe);
-		listBox1->Items->Add("Клиент отключен");
-		timerPipe->Enabled = false;
-	 }
-private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-		wchar_t       Buf[1001];
-		unsigned long cbWritten;
-		int			  i, l;
-		//Перекодировка строк
-		l = textBox2->Text->Length;
-		if (l == 0) return;
-		for (i=0; i < l; i++) {
-			Buf[i] = textBox2->Text->default[i];
-			Buf[i+1] = 0;
-		} // for
 
-		//Отправка строки в pipe
-		if (WriteFile(hPipe, Buf, 2*l+2, &cbWritten, NULL)) {
-			//listBox1->Items->Add(L"Отправлено: "+textBox2->Text);
-			textBox2->Text = "";
-		} else {
-		    listBox1->Items->Add("Ошибка WriteFile при отправке сообщения");
-		} // else
+		unsigned long cbMessages, cbMsgNumber, cbRead;
+		char server_hostname[255] = { 0 };
+		wchar_t server_hostname_w[255] = { 0 };
+		wchar_t pipe_name[300] = { 0 };
+
+		if (!GetMailslotInfo(ReceiveMailslotHandle, NULL, &cbMessages, &cbMsgNumber, NULL)) {
+			return;
+		}
+
+		if (cbMsgNumber > 0) {
+			if (ReadFile(ReceiveMailslotHandle, server_hostname, 255, &cbRead, NULL) && cbRead > 0) {
+				timerMailslot->Enabled = false;
+				CloseHandle(ReceiveMailslotHandle);
+				ReceiveMailslotHandle = INVALID_HANDLE_VALUE;
+
+				listBox1->Items->Add(L"Найден сервер: " + gcnew String(server_hostname));
+
+				mbstowcs_s(nullptr, server_hostname_w, server_hostname, _TRUNCATE);
+				// Подключаемся к единому имени канала без индекса
+				swprintf_s(pipe_name, 300, L"\\\\%ls\\pipe\\server", server_hostname_w);
+
+				// Ждём освобождения слота до 1 секунды (на случай одновременного подключения)
+				WaitNamedPipe(pipe_name, 1000);
+
+				hPipe = CreateFile(
+					pipe_name,
+					GENERIC_READ | GENERIC_WRITE,
+					0, NULL, OPEN_EXISTING, 0, NULL
+				);
+
+				if (hPipe != INVALID_HANDLE_VALUE) {
+					// Переводим клиентский конец канала в режим чтения сообщений
+					DWORD mode = PIPE_READMODE_MESSAGE;
+					SetNamedPipeHandleState(hPipe, &mode, NULL, NULL);
+
+					listBox1->Items->Add("Подключение к чату выполнено!");
+					timerPipe->Enabled = true;
+				}
+				else {
+					listBox1->Items->Add("Ошибка подключения к pipe (возможно, сервер переполнен)");
+				}
+			}
+		}
 	}
-private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
-		//Проверка состояния pipe
-		for(;;) {
-			
-			if (!GetOverlappedResult(hPipe, &Over, &cbRead, FALSE)) break;
 
-			if (cbRead == 0) break;
+	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (hPipe == INVALID_HANDLE_VALUE) return;
 
-			ZeroMemory(&Over, sizeof(Over));
+		DWORD bytesAvail = 0, cbRead = 0;
 
-			ReadFile(hPipe, Buf3, 512, &cbRead, &Over);
+		// Проверяем, разорвал ли сервер соединение
+		if (!PeekNamedPipe(hPipe, NULL, 0, NULL, &bytesAvail, NULL)) {
+			if (GetLastError() == ERROR_BROKEN_PIPE) {
+				timerPipe->Enabled = false;
+				CloseHandle(hPipe);
+				hPipe = INVALID_HANDLE_VALUE;
+				listBox1->Items->Add("Соединение с сервером разорвано");
+			}
+			return;
+		}
 
-			String^ s = gcnew String(Buf3);
-			listBox1->Items->Add(s);
-		} // if
-	}
-private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
-	
-	//Инициализация библиотеки WinSock (для использования gethostname)
-	WSADATA	    WSAData;
-	int		    rc;	
-	rc = WSAStartup(MAKEWORD(2, 0), &WSAData);
-	if (rc != 0) {
-		listBox1->Items->Add("Ошибка инициализации WSAStartup");
-		return;
-	} // if
+		if (bytesAvail == 0) return;
 
-	
-}
-private: System::Void timerMailslot_Tick(System::Object^ sender, System::EventArgs^ e) {
-	int           rc;
-	unsigned long cbMessages, cbMsgNumber, cbRead;
-	wchar_t       Buf[1001], Buf2[1001], pipe_name[255];
-
-	char server_response[255], server_hostname[255], client_uid[255];
-	wchar_t server_hostname_w[255] = { 0 };
-
-	// Определяем состояние канала Mailslot
-	rc = GetMailslotInfo(ReceiveMailslotHandle, NULL, &cbMessages, &cbMsgNumber, NULL);
-
-	if (!rc) {
-		listBox1->Items->Add("Ошибка GetMailslotInfo");
-	} // if
-
-	// Если в канале есть Mailslot сообщения, читаем первое из них
-	if (cbMsgNumber != 0) {
-		if (!first) return;
-		if (ReadFile(ReceiveMailslotHandle, server_response, 255, &cbRead, NULL)) {
-
-			//Отсоединение (освобождение) Mailslot
-			CloseHandle(ReceiveMailslotHandle);
-			//CloseHandle(SendMailslotHandle);
-
-			strcpy(server_hostname,strtok(server_response, ":"));
-			strcpy(client_uid, strtok(NULL, ":"));
-
-			tb_clientuid->Text = gcnew String(client_uid);
-		
-			String^ s = gcnew String(server_hostname);
-			listBox1->Items->Add(L"Найден сервер с именем: " + s);
-
-			//Подключение к серверу по протоколу Pipe			
-			//перекодирование char в wchar
-			for (int i = 0;i < strlen(server_hostname);i++)
-				server_hostname_w[i] = server_hostname[i];
-
-			//Формирование имени серверного pipe
-			wsprintf(pipe_name,L"\\\\%s\\pipe\\server%d",server_hostname_w,atoi(client_uid));
-
-			/*//Формирование адреса для подключения к серверу
-			wcscpy(Buf2, L"\\\\"); //присваивание C-строк
-			wcscat(Buf2, server_hostname_w); //конкатенация C-строк
-			wcscat(Buf2, L"\\pipe\\server"); //конкатенация C-строк*/
-
-			//System::Threading::Thread::Sleep(2000);
-
-			//Собственно подключение к pipe сервера
-			hPipe = CreateFile(pipe_name, GENERIC_READ | GENERIC_WRITE,
-				FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
-
-			if (hPipe != INVALID_HANDLE_VALUE) {
-				listBox1->Items->Add("Pipe создан, клиент подключен");
+		listBox1->BeginUpdate();
+		while (PeekNamedPipe(hPipe, NULL, 0, NULL, &bytesAvail, NULL) && bytesAvail > 0) {
+			ZeroMemory(Buf3, sizeof(Buf3));
+			if (ReadFile(hPipe, Buf3, sizeof(Buf3) - sizeof(wchar_t), &cbRead, NULL) && cbRead > 0) {
+				listBox1->Items->Add(gcnew String(Buf3));
 			}
 			else {
-				listBox1->Items->Add("Ошибка при подключении к pipe");
-			} // else
-
-			//Чтение из канала
-			ReadFile(hPipe, Buf3, 512, &cbRead, &Over);
-
-			//Запуск таймера Pipe
-			timerPipe->Enabled = true;
-			//Остановка таймера Mailslot
-			timerMailslot->Enabled = false;
-			first = 0;
+				break;
+			}
 		}
-		else {
-			listBox1->Items->Add("Ошибка ReadFile");
-		} // else
+		listBox1->EndUpdate();
 	}
-	else first = 1; // if
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (hPipe == INVALID_HANDLE_VALUE) {
+		listBox1->Items->Add("Сначала подключитесь к серверу");
+		return;
+	}
+	if (textBox2->Text->Length == 0) return;
+	String^ senderName = String::IsNullOrWhiteSpace(tb_clientuid->Text) ? "Клиент" : tb_clientuid->Text;
+	String^ fullMsg = String::Format("[{0}] {1}", senderName, textBox2->Text);
+	wchar_t Buf[512];
+	int l = fullMsg->Length;
+	if (l > 510) l = 510;
+	for (int i = 0; i < l; i++) {
+		Buf[i] = fullMsg[i];
+	}
+	Buf[l] = L'\0';
+	unsigned long cbWritten;
+	DWORD bytesToWrite = (DWORD)((l + 1) * sizeof(wchar_t));
+	if (WriteFile(hPipe, Buf, bytesToWrite, &cbWritten, NULL)) {
+		textBox2->Clear();
+	}
+	else {
+		listBox1->Items->Add("Ошибка отправки сообщения");
+	}
+}
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	timerPipe->Enabled = false;
+	timerMailslot->Enabled = false;
+	if (hPipe != INVALID_HANDLE_VALUE) {
+		CloseHandle(hPipe);
+		hPipe = INVALID_HANDLE_VALUE;
+	}
+	if (ReceiveMailslotHandle != INVALID_HANDLE_VALUE) {
+		CloseHandle(ReceiveMailslotHandle);
+		ReceiveMailslotHandle = INVALID_HANDLE_VALUE;
+	}
+	listBox1->Items->Add("Клиент отключен");
+}
+private: System::Void Form1_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
+	button2_Click(nullptr, nullptr);
+	WSACleanup();
 }
 };
 }
-
