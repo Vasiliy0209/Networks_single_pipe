@@ -1,0 +1,57 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\BOX\\Trainer\\2026_2027\\Term1\\Networks\\20261124\\PIPE_36\\Server\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{744AF272-8EE3-49BA-8AAB-1FB96193FAB3}|Server\\Server.vcxproj|D:\\BOX\\Trainer\\2026_2027\\Term1\\Networks\\20261124\\PIPE_36\\Server\\Server\\Form1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{744AF272-8EE3-49BA-8AAB-1FB96193FAB3}|Server\\Server.vcxproj|solutionrelative:Server\\Form1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{744AF272-8EE3-49BA-8AAB-1FB96193FAB3}|Server\\Server.vcxproj|D:\\BOX\\Trainer\\2026_2027\\Term1\\Networks\\20261124\\PIPE_36\\Server\\Server\\Form1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "RelativeMoniker": "D:0:0:{744AF272-8EE3-49BA-8AAB-1FB96193FAB3}|Server\\Server.vcxproj|solutionrelative:Server\\Form1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.h",
+              "DocumentMoniker": "D:\\BOX\\Trainer\\2026_2027\\Term1\\Networks\\20261124\\PIPE_36\\Server\\Server\\Form1.h",
+              "RelativeDocumentMoniker": "Server\\Form1.h",
+              "ToolTip": "D:\\BOX\\Trainer\\2026_2027\\Term1\\Networks\\20261124\\PIPE_36\\Server\\Server\\Form1.h",
+              "RelativeToolTip": "Server\\Form1.h",
+              "ViewState": "AgIAAB8AAAAAAAAAAAASwCgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-23T12:48:50.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.h [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\BOX\\Trainer\\2026_2027\\Term1\\Networks\\20261124\\PIPE_36\\Server\\Server\\Form1.h",
+              "RelativeDocumentMoniker": "Server\\Form1.h",
+              "ToolTip": "D:\\BOX\\Trainer\\2026_2027\\Term1\\Networks\\20261124\\PIPE_36\\Server\\Server\\Form1.h [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Server\\Form1.h [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-23T12:48:39.259Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
