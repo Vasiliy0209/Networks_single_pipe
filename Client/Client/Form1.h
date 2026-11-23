@@ -263,18 +263,17 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 		//Проверка состояния pipe
 		for(;;) {
-			//if (!GetOverlappedResult(hPipe, &Over, &cbRead, FALSE) || cbRead == 0) break;
-			GetOverlappedResult(hPipe, &Over, &cbRead, FALSE);
+			
+			if (!GetOverlappedResult(hPipe, &Over, &cbRead, FALSE)) break;
 
 			if (cbRead == 0) break;
+
+			ZeroMemory(&Over, sizeof(Over));
 
 			ReadFile(hPipe, Buf3, 512, &cbRead, &Over);
 
 			String^ s = gcnew String(Buf3);
 			listBox1->Items->Add(s);
-
-			//ZeroMemory(&Over, sizeof(Over));
-			
 		} // if
 	}
 private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
